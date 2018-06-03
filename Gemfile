@@ -24,6 +24,7 @@ gem 'react_on_rails', '~> 11.0', '>= 11.0.7'
 gem 'devise', '~> 4.4', '>= 4.4.3'
 gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem 'omniauth-facebook', '~> 5.0'
+gem 'thin', '~> 1.7', '>= 1.7.2'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
