@@ -1,5 +1,5 @@
 class StaticPagesController < ApplicationController
   def home
-      @person = { name: 'Wayne'}
+      @person = { name: current_user.name}
   end
 end
