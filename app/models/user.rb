@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+    require 'open-uri'
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -11,7 +12,8 @@ class User < ApplicationRecord
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
           user.email = auth.info.email
           user.name = auth.info.first_name + ' ' + auth.info.last_name
-          user.avatar = auth.info.image
+          url = auth.info.image.gsub("http","https") + "?type=large"
+          user.avatar = URI.parse(url) if auth.info.image?
           user.provider = auth.provider
           user.uid = auth.uid
           user.password = Devise.friendly_token[0,20]
