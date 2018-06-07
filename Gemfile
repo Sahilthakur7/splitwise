@@ -26,6 +26,7 @@ gem 'figaro', '~> 1.1', '>= 1.1.1'
 gem 'omniauth-facebook', '~> 5.0'
 gem 'thin', '~> 1.7', '>= 1.7.2'
 gem 'paperclip', '~> 6.0'
+gem 'rubocop', '~> 0.57.1'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
