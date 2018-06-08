@@ -8,6 +8,11 @@ class User < ApplicationRecord
   has_attached_file :avatar, styles: {medium: "300x300",thumb: "150x150"}
   validates_attachment_content_type :avatar,content_type: /\Aimage\/.*\Z/
 
+  has_many :group_relationships
+  has_many :groups, through: :group_relationships
+  validates :username, uniqueness: true
+  validates :email, uniqueness: true
+
   def self.from_omniauth(auth)
       where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
           user.email = auth.info.email
@@ -15,6 +20,7 @@ class User < ApplicationRecord
           url = auth.info.image.gsub("http","https") + "?type=large"
           user.avatar = URI.parse(url) if auth.info.image?
           user.provider = auth.provider
+          user.username = auth.info.first_name + "#{(rand() * 100).to_i}" + auth.info.last_name
           user.uid = auth.uid
           user.password = Devise.friendly_token[0,20]
       end

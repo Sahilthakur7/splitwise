@@ -22,4 +22,4 @@
   <%- resource_class.omniauth_providers.each do |provider| %>
     <%= link_to "Sign in with #{OmniAuth::Utils.camelize(provider)}", omniauth_authorize_path(resource_name, provider) %><br />
   <% end -%>
-<% end -%>
+<% end -%> NOTE: IF YOU SIGN UP WITH FACEBOOK, YOU WILL BE GIVEN A RANDOM USERNAME BASED ON YOUR FACEBOOK NAME. (Can be changed later)

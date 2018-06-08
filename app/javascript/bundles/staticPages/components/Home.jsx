@@ -20,7 +20,7 @@ class Home extends React.Component {
         return(
             <div id="header">
                 <h1>Is this working?</h1>
-                {this.props.name}
+                {this.props.name} ({this.props.username})
                 <p><img src = {this.props.avatar} onClick={this.onPictureHandler}></img>
                 </p>
                 This image has been clicked {this.state.count} times.
