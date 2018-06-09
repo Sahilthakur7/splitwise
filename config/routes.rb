@@ -5,7 +5,12 @@ Rails.application.routes.draw do
 
     resources :authentications, only: [:destroy]
 
-    devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' , registrations: 'registrations'}
+    devise_for :users, controllers: { omniauth_callbacks: 'users/omniauth_callbacks' , registrations: 'registrations'} 
+
+    resources :users do
+        resources :groups , only: [:index, :new]
+    end
+    resources :groups , only: [:show, :edit]
 
     devise_scope :user do
         root 'devise/sessions#new'
