@@ -1,3 +1,6 @@
 <%= react_component("GroupsIndex",props: @groups, prerender: false)%>
 
-<%= link_to "Create A New Group", new_user_group_path(current_user)%>
+<%= link_to "Create A New Group", new_group_path%>
+</br>
+</br>
+<%= link_to "Join already created group", join_group_path %>

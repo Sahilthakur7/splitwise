@@ -36,4 +36,8 @@ class User < ApplicationRecord
   def has_facebook_linked?
       self.provider.present? && self.uid.present?
   end
+
+  def join(group)
+      self.groups << group
+  end
 end
