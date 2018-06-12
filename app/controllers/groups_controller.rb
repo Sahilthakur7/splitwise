@@ -9,6 +9,7 @@ class GroupsController < ApplicationController
 
     def create
         @group = Group.create(group_params)
+        @group.generate_identifier
         current_user.join(@group)
 
         if(@group.save)
