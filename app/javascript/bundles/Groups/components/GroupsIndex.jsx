@@ -20,7 +20,7 @@ class GroupsIndex extends React.Component{
         let groupNames = null;
         if(this.props.groups && this.state.showGroups){
             groupNames = this.props.groups.map(g => {
-                return <li key={g.name}>{g.name}</li>;
+                return <li key={g.name}>{g.name}({g.identifier})</li>;
             });
         }
 

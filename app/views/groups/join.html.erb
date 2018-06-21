@@ -1,2 +1,4 @@
-<%= form_for(@group_relationship) do%>
+<%= form_for(@group_relationship) do |f|%>
+    <%=f.label :group_identifier%>
+    <%=f.text_field :group_identifier%>
 <%end%>

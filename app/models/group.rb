@@ -5,6 +5,14 @@ class Group < ApplicationRecord
     validates :identifier, presence: true, uniqueness: true
 
     def generate_identifier
-        .update_attributes(identifier: ('a'..'z').to_a.shuffle[0,8].join)
+        string = ('a'..'z').to_a.shuffle[0,8].join
+        already_assigned = check(string)
+        self.update_attributes(identifier: string) if already_assigned
+    end
+
+    private
+
+    def check(string)
+        Group.where(identifier: string)
     end
 end

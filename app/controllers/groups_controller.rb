@@ -13,15 +13,12 @@ class GroupsController < ApplicationController
         current_user.join(@group)
 
         if(@group.save)
+            @group.generate_identifier
             flash[:success] = "Group has been created."
             redirect_to user_groups_path(current_user)
         else
             redirect_to root_path
         end
-    end
-
-    def join
-
     end
 
     private
