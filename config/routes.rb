@@ -13,7 +13,9 @@ Rails.application.routes.draw do
     resources :groups, except: [:index] do
     end
 
-    get 'join_group' => 'groups#join'
+    get 'join_group' => 'group_relationships#new'
+
+    resources :group_relationships, only: [:create,:destroy]
 
     # resources :group_relationships, only: [:create, :destroy]
 

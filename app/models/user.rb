@@ -38,6 +38,6 @@ class User < ApplicationRecord
   end
 
   def join(group)
-      self.groups << group
+      self.groups << group unless self.groups.include?(group)
   end
 end
