@@ -10,6 +10,7 @@ class User < ApplicationRecord
 
   has_many :group_relationships
   has_many :groups, through: :group_relationships
+  has_many :entries
   validates :username, uniqueness: true
   validates :email, uniqueness: true
 
