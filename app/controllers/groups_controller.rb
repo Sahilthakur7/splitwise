@@ -1,6 +1,11 @@
 class GroupsController < ApplicationController
+    before_action :set_group , only: [:show]
     def index
         @groups = {groups: current_user.groups}
+    end
+
+    def show
+        @group_prop = {group: @group, members: @group.members}
     end
 
     def new
@@ -25,5 +30,9 @@ class GroupsController < ApplicationController
 
     def group_params
         params.require(:group).permit(:name)
+    end
+
+    def set_group
+        @group = Group.find(params[:id])
     end
 end

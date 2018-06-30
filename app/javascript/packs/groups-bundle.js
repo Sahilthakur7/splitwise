@@ -4,5 +4,5 @@ import ReactOnRails from 'react-on-rails';
 import GroupsIndex from '../bundles/Groups/components/GroupsIndex';
 
 ReactOnRails.register({
-    GroupsIndex,
+    GroupsIndex
 });
