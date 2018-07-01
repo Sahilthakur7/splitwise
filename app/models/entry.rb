@@ -4,4 +4,5 @@ class Entry < ApplicationRecord
 
   validates :ledger, presence: true
   validates :member , presence: true 
+  validates :amount , presence: true
 end

@@ -4,7 +4,7 @@ class GroupsShow extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            showEntryForm : false
+            showEntryForm = false;
         }
     }
 
@@ -12,14 +12,14 @@ class GroupsShow extends React.Component{
         var showing = this.state.showEntryForm;
         this.setState(
             {
-                showEntryForm: !showing,
+                showEntryForm: !showing
             }
         )
     }
 
     render(){
         let memberNames = [];
-        let entryForm = null;
+        let entryFrom = null;
         memberNames = this.props.members.map(member => {
             return<li key={member.id}> {member.name}</li>
         });
@@ -41,7 +41,7 @@ class GroupsShow extends React.Component{
                     {memberNames}
                 </ul>
                 <div>
-                    <button onClick={this.showEntryForm}>Make an entry</button>
+                    <button onClick={showEntryForm}>Make an entry</button>
                     {entryForm}
                 </div>
             </div>
