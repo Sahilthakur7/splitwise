@@ -4,7 +4,9 @@ class GroupsShow extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            showEntryForm : false
+            showEntryForm : false,
+            totalSpent: this.props.group.total_spent
+
         }
     }
 
@@ -17,6 +19,14 @@ class GroupsShow extends React.Component{
         )
     }
 
+    handleInputSubmit = (e) => {
+        var tempSpent = parseFloat(this.state.totalSpent);
+        this.setState({
+            totalSpent: parseFloat(tempSpent) + parseFloat(e.target.value)
+        })
+    }
+
+
     render(){
         let memberNames = [];
         let entryForm = null;
@@ -24,26 +34,18 @@ class GroupsShow extends React.Component{
             return<li key={member.id}> {member.name}</li>
         });
 
-        let totalSpent = 0;
-
-        if(this.props.group.total_spent){
-            totalSpent = this.props.group.total_spent;
-        }
 
         if(this.state.showEntryForm){
-            entryForm = <input></input>;
+
+            entryForm =<form onSubmit={this.handleInputSubmit}> <input value={this.state.entry} type="number"></input></form>;
         }
 
         return(
             <div>
-                {this.props.group.name} Total Spent - {totalSpent} 
+                {this.props.group.name} Total Spent - {this.state.totalSpent} 
                 <ul>
                     {memberNames}
                 </ul>
-                <div>
-                    <button onClick={this.showEntryForm}>Make an entry</button>
-                    {entryForm}
-                </div>
             </div>
         )
     }
