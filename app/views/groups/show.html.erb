@@ -1,1 +1,11 @@
 <%= react_component("GroupsShow",props: @group_prop, prerender: false)%>
+
+<%= form_for([@group,@group.ledger,@entry]) do |f|%>
+    <% if @entry.errors.any?%>
+        <%= @entry.errors.full_messages%>
+    <%end%>
+    <%=f.label :amount%>
+    <%=f.text_field :amount%>
+
+    <%=f.submit%>
+<%end%>

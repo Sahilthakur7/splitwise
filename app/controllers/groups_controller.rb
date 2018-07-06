@@ -6,6 +6,7 @@ class GroupsController < ApplicationController
 
     def show
         @group_prop = {group: @group, members: @group.members}
+        @entry = @group.ledger.entries.new
     end
 
     def new
@@ -14,7 +15,7 @@ class GroupsController < ApplicationController
 
     def create
         @group = Group.create(group_params)
-        @group.generate_identifier
+        @group.generate_dependencies
         current_user.join(@group)
 
         if(@group.save)

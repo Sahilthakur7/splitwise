@@ -11,7 +11,12 @@ Rails.application.routes.draw do
         resources :groups, only: [:index]
     end
     resources :groups, except: [:index] do
+        resource :ledger do
+            resources :entries
+        end
     end
+
+
 
     get 'join_group' => 'group_relationships#new'
 
