@@ -8,6 +8,7 @@ class Group < ApplicationRecord
     def generate_dependencies
         generate_identifier
         generate_ledger
+        default_amount
     end
 
     def generate_identifier
@@ -18,7 +19,16 @@ class Group < ApplicationRecord
 
     def generate_ledger
         ledger = Ledger.new
+        ledger.total_spent = 0
         ledger.group = self
+    end
+
+    def default_amount
+        self.update_attributes(total_spent: 0)
+    end
+
+    def update_total(amount)
+        self.update_attributes(total_spent: self.total_spent + amount)
     end
 
 

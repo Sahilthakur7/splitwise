@@ -9,3 +9,21 @@
 
     <%=f.submit%>
 <%end%>
+
+<h3>All the entries :-</h3>
+<table id="tab1">
+    <tr>
+        <th>Name</th>
+        <th>Amount</th>
+        <th>Date</th>
+    </tr>
+
+    <%@group.ledger.entries.each do |entry|%>
+        <tr>
+            <td><%=entry.user%></td>
+            <td><%=entry.amount%></td>
+            <td><%=entry.created_at%></td>
+        </tr>
+    <%end%>
+</table>
+

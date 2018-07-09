@@ -6,6 +6,7 @@ class EntriesController < ApplicationController
         @entry.user = current_user
         @entry.ledger = @group.ledger
         if @entry.save!
+            @entry.ledger.update_total(params[:entry][:amount].to_i)
             redirect_to group_path(@group)
         else
             redirect_to root_path

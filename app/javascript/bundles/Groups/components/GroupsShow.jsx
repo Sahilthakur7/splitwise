@@ -5,7 +5,7 @@ class GroupsShow extends React.Component{
         super(props);
         this.state = {
             showEntryForm : false,
-            totalSpent: this.props.group.total_spent || 0
+            totalSpent: this.props.group.total_spent
 
         }
     }

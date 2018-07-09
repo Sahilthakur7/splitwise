@@ -5,7 +5,7 @@ class GroupsController < ApplicationController
     end
 
     def show
-        @group_prop = {group: @group, members: @group.members}
+        @group_prop = {group: @group, members: @group.members, ledger: @group.ledger , entries: @group.ledger.entries}
         @entry = @group.ledger.entries.new
     end
 
