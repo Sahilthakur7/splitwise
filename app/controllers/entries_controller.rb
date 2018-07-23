@@ -20,7 +20,7 @@ class EntriesController < ApplicationController
     end
 
     def entry_params
-        params.require(:entry).permit(:amount,:group,:user)
+        params.require(:entry).permit(:amount,:group,:user,:description)
     end
 
 

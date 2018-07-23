@@ -8,4 +8,18 @@ class Ledger < ApplicationRecord
         self.group.update_total(amount)
     end
 
+    def entitled(user)
+        user_spent(user) - share
+    end
+
+    def share
+        total_spent/self.group.members.count
+    end
+
+    def user_spent(user)
+        entries.where(user: user).sum(:amount)
+    end
+
+
+
 end
