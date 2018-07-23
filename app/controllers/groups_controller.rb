@@ -7,6 +7,7 @@ class GroupsController < ApplicationController
     def show
         @group_prop = {group: @group, members: @group.members, ledger: @group.ledger , entries: @group.ledger.entries}
         @entry = @group.ledger.entries.new
+        @entries = @group.ledger.entries.except([1])
     end
 
     def new
@@ -19,7 +20,6 @@ class GroupsController < ApplicationController
         current_user.join(@group)
 
         if(@group.save)
-            @group.generate_identifier
             flash[:success] = "Group has been created."
             redirect_to user_groups_path(current_user)
         else

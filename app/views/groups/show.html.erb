@@ -18,12 +18,13 @@
         <th>Date</th>
     </tr>
 
-    <%@group.ledger.entries.each do |entry|%>
+    <%@entries.each do |entry|%>
         <tr>
-            <td><%=entry.user%></td>
+            <td><%=entry.user.name%></td>
             <td><%=entry.amount%></td>
-            <td><%=entry.created_at%></td>
+            <td><%=entry.created_at.to_date%></td>
         </tr>
     <%end%>
 </table>
+
 
