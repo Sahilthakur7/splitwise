@@ -20,6 +20,18 @@ class Ledger < ApplicationRecord
         entries.where(user: user).sum(:amount)
     end
 
+    def entitled_hash #actually returns a nested array
+        entitled_hash = {}
+        self.group.members.each do |mem|
+            entitled_hash.merge!(mem => entitled(mem))
+        end
+        entitled_hash.sort_by do |name,value|
+            value
+        end.reverse
+    end
+
+
+
 
 
 end

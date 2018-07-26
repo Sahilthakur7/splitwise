@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :group_relationships
   has_many :groups, through: :group_relationships
   has_many :entries
-  validates :username, uniqueness: true
+  validates :username, uniqueness: true,presence: true
   validates :email, uniqueness: true
 
   def self.from_omniauth(auth)
