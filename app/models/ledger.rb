@@ -35,8 +35,8 @@ class Ledger < ApplicationRecord
         usersleft = userpos(user)
         dealings_left_array = []
 
-        entitled_hash.first(usersleft).each do |u|
-            dealings_left_array << calculate_dealing(u)
+        entitled_hash.first(usersleft).each_with_index do |u,i|
+            dealings_left_array << calculate_dealing(u,i)
         end
 
         updated_entitled(user,dealings_left_array)
@@ -48,8 +48,8 @@ class Ledger < ApplicationRecord
         entitled_hash.index([user,self.entitled(user)])
     end
 
-    def calculate_dealing(user)
-        (self.entitled(user)/ group.members.count - userpos(user)).abs
+    def calculate_dealing(user,i)
+        (self.entitled(user)) / ( self.group.members.count - i - 1).abs
     end
 
     def sum_of_dealings_left(array)
