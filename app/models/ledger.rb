@@ -33,13 +33,14 @@ class Ledger < ApplicationRecord
 
     def absolute_dealings_left_array(user)
         usersleft = userpos(user)
-        dealings_left_array = []
+        absolute_dealings_left_array = []
 
-        entitled_hash.first(usersleft).each_with_index do |u,i|
-            dealings_left_array << calculate_absolute_dealing(u,i)
+
+        absolute_dealings_left_array = entitled_hash.first(usersleft).map.with_index do |u,i|
+            calculate_absolute_dealing(u[0],i)
         end
 
-        dealings_left_array
+        absolute_dealings_left_array
     end
 
     def dealings_left_array(user)
@@ -47,12 +48,24 @@ class Ledger < ApplicationRecord
         usersleft = userpos(user)
         dealings_left_array = []
 
-        entitled_hash.first(usersleft).each_with_index do |u,i|
-            dealings_left_array << calculate_dealing(u,i)
+        dealings_left_array = entitled_hash.first(usersleft).map.with_index do |u,i|
+            calculate_dealing(u[0],i)
         end
 
         dealings_left_array
     end
+
+    def array_to_return(user)
+        usersleft = userpos(user)
+        array_to_return = []
+
+        array_to_return = entitled_hash.first(usersleft).map.with_index do |u,i|
+            calculate_return_dealing(u[0],i)
+        end
+
+        array_to_return
+    end
+    
 
     def userpos(user)
         entitled_hash.index([user,self.entitled(user)])
@@ -66,21 +79,24 @@ class Ledger < ApplicationRecord
         (self.updated_entitled(user)) / ( self.group.members.count - i - 1).abs
     end
 
+    def calculate_return_dealing(user,i)
+        (self.updated_final_entitled(user)) / ( self.group.members.count - i - 1).abs
+    end
+
     def updated_entitled(user)
-        self.entitled(user)  + self.absolute_sum(user)
+        (self.entitled(user)  + self.absolute_sum(user).to_i).abs
+    end
+
+    def updated_final_entitled(user)
+        (self.entitled(user)  + self.absolute_final_sum(user).to_i).abs
     end
 
     def absolute_sum(user)
-        self.absolute_dealings_left_array(user).inject(0) do |sum,number|
-            sum + number
-        end
-
+        self.absolute_dealings_left_array(user).reduce(&:+)
     end
 
-    def sum_of_dealings_left(array)
-        array.inject do |running_total, num|
-            running_total + num
-        end
+    def absolute_final_sum(user)
+        self.dealings_left_array(user).reduce(&:+)
     end
 
 

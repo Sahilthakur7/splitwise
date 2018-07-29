@@ -54,3 +54,8 @@
 <hr>
 <h2>Your Own Dealings:</h2>
 
+    TO GIVE :</br>
+<% @group.ledger.array_to_return(current_user).each_with_index do |value,i|%>
+    <%=@group.ledger.entitled_hash[i][0].name%> :  <%= value %>
+    <br>
+<%end%>
