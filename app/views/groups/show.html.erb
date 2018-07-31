@@ -35,27 +35,47 @@
         </tr>
     <%end%>
 </table>
-</br>
+    </br>
 
-<table id="shares">
-    <tr>
-        <th>Name</th>
-        <th>Entitled</th>
-    </tr>
-
-    <%@group.members.each do |member|%>
+    <table id="shares">
         <tr>
-            <td><%=member.name%></td>
-            <td><%=@group.ledger.entitled(member)%></td>
+            <th>Name</th>
+            <th>Entitled</th>
         </tr>
-    <%end%>
-</table>
 
-<hr>
-<h2>Your Own Dealings:</h2>
+        <%@group.members.each do |member|%>
+            <tr>
+                <td><%=member.name%></td>
+                <td><%=@group.ledger.entitled(member)%></td>
+            </tr>
+        <%end%>
+    </table>
 
-    TO GIVE :</br>
-<% @group.ledger.array_to_return(current_user).each_with_index do |value,i|%>
-    <%=@group.ledger.entitled_hash[i][0].name%> :  <%= value %>
-    <br>
-<%end%>
+    <hr>
+    <h2>Your Own Dealings:</h2>
+
+    <div>
+
+        <div class="give">
+            <h3>TO GIVE :-</h3>
+            <% @group.ledger.array_to_return(current_user).each_with_index do |value,i|%>
+                <%=@group.ledger.entitled_hash[i][0].name%> :  <%= value %>
+                <br>
+            <%end%>
+
+            <hr>
+            Total : <%= @group.ledger.left_total(current_user)%>
+    </div>
+
+    <div class="take">
+
+        <h3>TO TAKE :-</h3>
+        <% @group.ledger.right_array(current_user).each_with_index do |value,i|%>
+            <%=@group.ledger.entitled_hash[@group.ledger.entitled_hash.count - i -1][0].name%> :  <%= value %>
+            <br>
+        <%end%>
+
+        <hr>
+        Total : <%= @group.ledger.right_total(current_user)%>
+</div>
+    </div>

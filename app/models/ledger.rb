@@ -65,7 +65,27 @@ class Ledger < ApplicationRecord
 
         array_to_return
     end
-    
+
+    def right_array(user)
+        usersright = self.group.members.count - userpos(user) - 1
+
+        right_array = []
+        right_array = entitled_hash.last(usersright).map.with_index do |u,i|
+            self.array_to_return(u[0])[userpos(user)]
+        end
+
+        right_array
+
+    end
+
+    def left_total(user)
+        array_to_return(user).reduce(&:+)
+    end
+
+    def right_total(user)
+        right_array(user).reduce(&:+)
+    end
+
 
     def userpos(user)
         entitled_hash.index([user,self.entitled(user)])
